@@ -1,0 +1,62 @@
+GET http://localhost:3000/api/db/10001
+
+###
+GET http://localhost:3000/api/db/games?page=1 
+
+
+###
+GET http://localhost:3000/api/db/games/10054
+###
+
+POST http://localhost:3000/api/db/games HTTP/1.1
+Content-Type: application/json
+
+{
+    "id":"1111",
+    "name":"1111",
+    "create":"1111",
+    "icon":"1111",
+    "description":"1111",
+    "release":"1111",
+    "developer":"1111",
+    "genre":"1111",
+    "platform":"1111",
+    "scores":"1111",
+    "images":"1111"
+}
+
+###
+GET  http://localhost:3000/api/db/collectionCount?collection=games
+
+###
+
+GET  http://localhost:3000/api/db/games/search?key=id&value=10012
+
+###
+DELETE  http://localhost:3000/api/db/games?id=10046
+
+###
+PUT http://localhost:3000/api/db/games HTTP/1.1
+Content-Type: application/json
+
+{
+    "id":"10015",
+    "name":"1111",
+    "create":"1111",
+    "icon":"1111",
+    "description":"1111",
+    "release":"1111",
+    "developer":"1111",
+    "genre":"1111",
+    "platform":"1111",
+    "scores":"1111",
+    "images":"1111"
+}
+
+###
+GET  http://localhost:3000/api/db/rank?page=1
+
+###
+GET http://localhost:3000/api/db/rank/viewRank?ids=10046/10038/10034/10054/10047
+Content-Type: application/json
+
