@@ -34,7 +34,7 @@ export async function action_EditGame  (
         })
        
         //fetch the api and write data in database 
-        await fetch("http://localhost:3000/api/db/games", {
+        await fetch(`${process.env.DEPLOY_URL}/api/db/games`, {
         method: "PUT",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(data),

@@ -6,7 +6,7 @@ export async function action_GetGame (page:number) {
     try{
       // get the data from the api, should give a param with current page number
         const res = await fetch(
-            `http://localhost:3000/api/db/games?page=${page}`,
+            `${process.env.DEPLOY_URL}/api/db/games?page=${page}`,
             { 
               method: "GET",
               headers: { "Content-type": "application/json" } }

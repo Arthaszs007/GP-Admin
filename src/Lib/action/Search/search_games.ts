@@ -7,7 +7,7 @@ export  async function action_SearchGames(key:string,value:string) {
         if(!key||!value) throw new customError("key or value can't be empty",EErrorType.PARAMS_UNDEFINED)
         
         const res = await fetch(
-            `http://localhost:3000/api/db/games/search?key=${key}&value=${value}`,
+            `${process.env.DEPLOY_URL}/api/db/games/search?key=${key}&value=${value}`,
             { 
                 method:"GET", 
                 headers: {

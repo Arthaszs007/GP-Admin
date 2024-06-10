@@ -55,13 +55,13 @@ const GameList = () => {
     InitialModal(gameid);
   };
   return (
-    <div className="overflow-x-auto">
+    <div>
       <table className="table table-zebra border-collapse border border-slate-400">
         {/* head */}
         <thead>
           <tr>
             <th className="w-40 border border-slate-300">ID</th>
-            <th className="w-80 border border-slate-300">Name</th>
+            <th className="w-80 border border-slate-300 ">Name</th>
             <th className="w-40 border border-slate-300">Scores</th>
             <th className="w-40 border border-slate-300">Operation</th>
           </tr>

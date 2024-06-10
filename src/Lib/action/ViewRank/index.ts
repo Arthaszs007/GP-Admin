@@ -3,7 +3,8 @@ import { EErrorType } from "@/Lib/enum"
 
 export async function action_ViewRank(ids:string){
     try{
-        const res = await fetch(`http://localhost:3000/api/db/rank/viewRank?ids=${ids}`,
+       
+        const res = await fetch(`${process.env.DEPLOY_URL}/api/db/rank/viewRank?ids=${ids}`,
             {
                 method:"GET",
                 headers:{'Content-Type': 'application/json'}
@@ -12,7 +13,7 @@ export async function action_ViewRank(ids:string){
         if(!res.ok) throw new customError("falied to fetch",EErrorType.FETCH_FAILD);
         
         const data = await res.json();
-        
+        console.log(data)
         return {data}
 
     }catch(e){

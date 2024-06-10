@@ -7,7 +7,7 @@ export async function action_GetCollectionCount(collectionName:string,pageCut:nu
 
     try{
         // invoke the api with a param as collection name
-        const res =  await fetch(`http://localhost:3000/api/db/collectionCount?collection=${collectionName}`,
+        const res =  await fetch(`${process.env.DEPLOY_URL}/api/db/collectionCount?collection=${collectionName}`,
         {
             method:"GET"
         })

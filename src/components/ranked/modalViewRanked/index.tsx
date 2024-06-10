@@ -19,7 +19,7 @@ const ModalViewRanked = ({
             </button>
           </form>
           <h3 className="font-bold text-lg">{name}</h3>
-          <table className="table table-zebra border-collapse border border-slate-400">
+          <table className="table table-zebra border-collapse border border-slate-400 ">
             {/* head */}
             <thead>
               <tr>

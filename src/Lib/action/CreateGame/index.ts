@@ -34,7 +34,7 @@ export async function action_CreateGame  (
         })
         //verify id is used or not
         const isExist = await fetch(
-            `http://localhost:3000/api/db/games/${data.id}`,
+            `${process.env.DEPLOY_URL}/api/db/games/${data.id}`,
             {
               method: "GET",
             }
@@ -44,7 +44,7 @@ export async function action_CreateGame  (
         if(isExist) throw new customError("gameid is used",EErrorType.ID_USED)
 
         //fetch the api and write data in database 
-        await fetch("http://localhost:3000/api/db/games", {
+        await fetch(`${process.env.DEPLOY_URL}/api/db/games`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(data),
