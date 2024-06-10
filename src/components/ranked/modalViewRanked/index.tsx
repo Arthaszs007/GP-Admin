@@ -6,11 +6,11 @@ const ModalViewRanked = ({
   games,
 }: {
   name: string;
-  games: Rankchildren;
+  games: Rankchildren | undefined;
 }) => {
   return (
     <div>
-      <dialog id="my_modal_3" className="modal">
+      <dialog id="rank_view" className="modal">
         <div className="modal-box">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
@@ -19,27 +19,33 @@ const ModalViewRanked = ({
             </button>
           </form>
           <h3 className="font-bold text-lg">{name}</h3>
+          <table className="table table-zebra border-collapse border border-slate-400">
+            {/* head */}
+            <thead>
+              <tr>
+                <th className="w-40 border border-slate-300">Rank</th>
+                <th className="w-80 border border-slate-300">Name</th>
+                <th className="w-40 border border-slate-300">Genre</th>
+              </tr>
+            </thead>
+            <tbody>
+              {games &&
+                games.map((item, index) => (
+                  <tr key={index}>
+                    <td className="w-40 border border-slate-300">
+                      {index + 1}
+                    </td>
+                    <td className="w-80 border border-slate-300">
+                      {item.name}
+                    </td>
+                    <td className="w-40 border border-slate-300">
+                      {item.genre}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
         </div>
-        <table className="table table-zebra border-collapse border border-slate-400">
-          {/* head */}
-          <thead>
-            <tr>
-              <th className="w-40 border border-slate-300">Rank</th>
-              <th className="w-80 border border-slate-300">Name</th>
-              <th className="w-40 border border-slate-300">Genre</th>
-            </tr>
-          </thead>
-          <tbody>
-            {games &&
-              games.map((item, index) => (
-                <tr key={index}>
-                  <td className="w-40 border border-slate-300">{index + 1}</td>
-                  <td className="w-80 border border-slate-300">{item.name}</td>
-                  <td className="w-40 border border-slate-300">{item.genre}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
       </dialog>
     </div>
   );

@@ -1,7 +1,7 @@
 import { customError } from "@/Lib/customError"
 import { EErrorType } from "@/Lib/enum"
 
-export async function action_ViewRan(ids:string){
+export async function action_ViewRank(ids:string){
     try{
         const res = await fetch(`http://localhost:3000/api/db/rank/viewRank?ids=${ids}`,
             {
