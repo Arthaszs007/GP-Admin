@@ -75,7 +75,7 @@ const InputArea = ({
       </div>
       <div className="flex ml-5">
         <input
-          type="text"
+          type="search"
           placeholder="Type for search"
           className="input input-bordered w-full max-w-xs input-sm"
           onChange={HandleValueChange}

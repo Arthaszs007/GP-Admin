@@ -6,11 +6,11 @@ import React from "react";
 
 const RankMain = () => {
   return (
-    <div className="mt-10">
+    <div className="mt-3">
       <div>
         <ModalCreateRanked />
       </div>
-      <div className="flex">
+      <div className="flex mt-3">
         <RankedList />
       </div>
       <div className="flex mb-20 mt-3 justify-center">
