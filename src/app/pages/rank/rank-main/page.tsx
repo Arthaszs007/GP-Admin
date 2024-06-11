@@ -1,11 +1,15 @@
 import Pagination from "@/components/common/pagination";
 import SearchBar from "@/components/games/searchbar";
+import ModalCreateRanked from "@/components/ranked/modalCreateRanked";
 import RankedList from "@/components/ranked/rankedList";
 import React from "react";
 
 const RankMain = () => {
   return (
     <div className="mt-10">
+      <div>
+        <ModalCreateRanked />
+      </div>
       <div className="flex">
         <RankedList />
       </div>

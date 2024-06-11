@@ -53,7 +53,6 @@ const RankedList = () => {
           <tr>
             <th className="w-40 border border-slate-300">ID</th>
             <th className="w-80 border border-slate-300">Name</th>
-            <th className="w-40 border border-slate-300">Description</th>
             <th className="w-40 border border-slate-300">Operation</th>
           </tr>
         </thead>
@@ -63,9 +62,6 @@ const RankedList = () => {
               <tr key={index}>
                 <td className="w-40 border border-slate-300">{item.id}</td>
                 <td className="w-80 border border-slate-300">{item.name}</td>
-                <td className="w-40 border border-slate-300">
-                  {item.description}
-                </td>
                 <td className=" w-40 border border-slate-300 ">
                   <div className="flex flex-row">
                     <button

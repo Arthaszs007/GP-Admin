@@ -3,7 +3,7 @@ import { EErrorType } from "@/Lib/enum"
 
 export async function action_DeleteGame(gameid:string) {
     try{
-        const res = await fetch(`http://localhost:3000/api/db/games?id=${gameid}`,
+        const res = await fetch(`${process.env.DEPLOY_URL}/api/db/games?id=${gameid}`,
         {
             method:"DELETE",
              headers: {

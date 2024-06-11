@@ -18,7 +18,6 @@ type Game ={
 type Rank ={
     id:string,
     name:string,
-    description:string,
     children:string
 }
 //for rank view page

@@ -13,7 +13,6 @@ export async function action_ViewRank(ids:string){
         if(!res.ok) throw new customError("falied to fetch",EErrorType.FETCH_FAILD);
         
         const data = await res.json();
-        console.log(data)
         return {data}
 
     }catch(e){
