@@ -4,7 +4,7 @@ import { customError } from "../../customError"
 import { EErrorType } from "../../enum"
 
 export async function action_CreateGame  (  
-    prevState: {error:string,code:string}|undefined,
+    preState: {error:string,code:string}|undefined,
     formData: FormData,
     ) {
     try{
@@ -37,6 +37,7 @@ export async function action_CreateGame  (
             `${process.env.DEPLOY_URL}/api/db/games/${data.id}`,
             {
               method: "GET",
+              headers: {'Content-Type': 'application/json'}
             }
           ).then((res) => res.json());
           
@@ -53,10 +54,8 @@ export async function action_CreateGame  (
         
 
     }catch(e){
-        if(e instanceof z.ZodError) return {error:"can't be empty",code:"VALIDATION_ERROR"}
-        else if (e instanceof customError && e.code === EErrorType.ID_USED) {
-            return {error:e.message,code:e.code}
-        }
+        if(e instanceof z.ZodError) return {error:"can't be empty",code:EErrorType.UNVALID_INPUT}
+        else if (e instanceof customError && e.code === EErrorType.ID_USED) return {error:e.message,code:e.code}
         else return {error:"unknown error",code:EErrorType.UNKNOWN}
     }
 

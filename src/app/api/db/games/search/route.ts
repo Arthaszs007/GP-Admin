@@ -12,7 +12,7 @@ export async function GET(req:Request) {
     const db = client.db("GP");
     //if key equal id, execute the full match
     if(key ==="id"){
-        const gameName = await db
+        const game = await db
         .collection("games")
         .find({id:value},{
             projection:{
@@ -30,11 +30,11 @@ export async function GET(req:Request) {
         .limit(1)
         .toArray()
 
-        return NextResponse.json(gameName,{status:200})
+        return NextResponse.json(game,{status:200})
     }
     // if key equal name, execute fuzzy match
     else if(key ==="name"){
-        const gameName = await db
+        const game = await db
         .collection("games").aggregate([
             {
                 $search:{
@@ -63,7 +63,7 @@ export async function GET(req:Request) {
 
 
     
-        return NextResponse.json(gameName,{status:200})
+        return NextResponse.json(game,{status:200})
     }    
 
     return NextResponse.json("none")

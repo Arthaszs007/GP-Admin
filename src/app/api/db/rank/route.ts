@@ -23,12 +23,23 @@ export async function GET(req:Request) {
    .limit(limit).toArray();
     return NextResponse.json(rank,{status:200})
 }
+// create a new ranke top on database,need pass params on body as rank type
+export async function POST(req:Request) {
 
-export async function PUT(req:Request) {
-    return NextResponse.json("",{status:200})
+    const rank = await req.json();
+
+    const client = await clientPromise;
+
+    const db = client.db("GP");
+
+    await db
+    .collection("rank")
+    .insertOne(rank);
+
+    return NextResponse.json(rank,{status:200})
 }
 
-export async function POST(req:Request){
+export async function PUT(req:Request){
     return NextResponse.json("",{status:200})
 }
 
