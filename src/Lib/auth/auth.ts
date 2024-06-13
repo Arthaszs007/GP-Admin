@@ -12,7 +12,7 @@ async function getUser(username: string,password:string):Promise<User | undefine
         email: null,
         image:null
       };
-    const data = await fetch(`http://localhost:3000/api/db/${username}`, {
+    const data = await fetch(`${process.env.DEPLOY_URL}/api/db/${username}`, {
       method: "GET",
     }).then((res) => res.json());
         if (data.admin[0].password === password) {
@@ -48,7 +48,7 @@ export const { auth, signIn, signOut } = NextAuth({
           const user = await getUser(username,password);
 
          console.log(user)
-         
+
           if (!user) return null;
           return user
         }
