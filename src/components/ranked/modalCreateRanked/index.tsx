@@ -2,8 +2,12 @@
 import { action_CreateRanke } from "@/Lib/action/CreateRank";
 import { action_SearchGames } from "@/Lib/action/Search/search_games";
 import { EErrorType } from "@/Lib/enum";
+import { setPage } from "@/redux/feathers/collectionCount_slice";
+import { setRefresh } from "@/redux/feathers/listRefresh_slice";
+import { AppDispatch } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
+import { useDispatch } from "react-redux";
 
 const ModalCreateRanked = () => {
   //get the error from submitted form
@@ -12,6 +16,9 @@ const ModalCreateRanked = () => {
   //storage the input gameID
   const [gameID, setGameID] = useState("");
 
+  //get redux dispatch
+  const reduxDispatch = useDispatch<AppDispatch>();
+
   // games waitList to display as badge label
   const [waitList, setWaitList] = useState<Games>([]);
 
@@ -19,7 +26,7 @@ const ModalCreateRanked = () => {
   const [messageError, setMessageError] = useState<string | undefined>();
 
   // get the ids from waitlist items and combin as string to submit
-  const [ids, setIds] = useState<string>();
+  const [ids, setIds] = useState<string>("");
 
   //open the modal page
   const ModalOpen = () => {
@@ -29,6 +36,28 @@ const ModalCreateRanked = () => {
     if (modal) {
       modal.showModal();
       modal.scrollTop = 0;
+    } else {
+      console.error("Modal element not found");
+    }
+  };
+
+  //close the modal and reset the error message and form input
+  const ModalClose = () => {
+    //active the refresh on pagination and data list
+    reduxDispatch(setRefresh({ toRefresh: true }));
+    reduxDispatch(setPage({ toRefresh: true }));
+
+    const modal = document.getElementById(
+      "rank_create"
+    ) as HTMLDialogElement | null;
+    // get form form "id" and clean it when user close the modal and reset the error feedback
+    if (modal) {
+      const form = document.getElementById("create_rank") as
+        | HTMLFormElement
+        | undefined;
+      if (form) form.reset();
+      setMessageError("");
+      modal.close();
     } else {
       console.error("Modal element not found");
     }
@@ -47,6 +76,7 @@ const ModalCreateRanked = () => {
   useEffect(() => {
     setMessageError(formError?.error);
     if (formError?.code === EErrorType.NO_ERROR) {
+      ModalClose();
     }
   }, [formError]);
   //add game with search action, if successfully, return the game data
@@ -148,7 +178,7 @@ const ModalCreateRanked = () => {
                 </>
               )}
               <SubmitButton />
-              <button type="button" className="btn">
+              <button type="button" className="btn" onClick={ModalClose}>
                 Close
               </button>
             </div>
