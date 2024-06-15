@@ -22,17 +22,16 @@ export async function action_CreateRanke(
             children:formData.get("children")
         })
        
-        // const isExist = await fetch(
-        //     `${process.env.DEPLOY_URL}/api/db/rank/viewRank?ids=${data.id}`,
-        //     {
-        //         method:"GET",
-        //         headers:{'Content-Type': 'application/json'}
-        //     }
-        // ).then((res)=>res.json());
+        const isExist = await fetch(
+            `${process.env.DEPLOY_URL}/api/db/rank/${data.id}`,
+            {
+                method:"GET",
+                headers:{'Content-Type': 'application/json'}
+            }
+        ).then((res)=>res.json());
        
-        // console.log(222,isExist)
 
-        // if(isExist.length === 0) throw new customError("rank id is used",EErrorType.ID_USED)
+        if(isExist) throw new customError("rank id is used",EErrorType.ID_USED)
 
         const res =  await fetch(`${process.env.DEPLOY_URL}/api/db/rank`,
             {
