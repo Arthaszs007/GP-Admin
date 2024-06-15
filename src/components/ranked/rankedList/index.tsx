@@ -4,6 +4,7 @@ import { useAppSelector } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import ModalViewRanked from "../modalViewRanked";
 import { action_ViewRank } from "@/Lib/action/ViewRank";
+import ModalEditRanked from "../modalEditRanked";
 
 const RankedList = () => {
   //  data as Rank type to be storage
@@ -11,6 +12,9 @@ const RankedList = () => {
 
   //to storage the ranked children data as name and genre
   const [children, setChildren] = useState<Rankchildren>();
+
+  //to storage the clicked rank data
+  const [rank, setRank] = useState<Rank>();
 
   // get the current number to refresh page
   const page = useAppSelector((state) => state.collectionCount_slice.curPage);
@@ -20,8 +24,8 @@ const RankedList = () => {
     const res = await action_ViewRank(ids);
     setChildren(res?.data);
   }
-  // open the modal function, receive a param as ids string type
-  const OpenModal = (ids: string) => {
+  // open the  view modal , receive a param as ids string type
+  const OpenViewModal = (ids: string) => {
     GetRankedChildren(ids);
   };
   //minitor the children , if it got data, open the modal
@@ -34,6 +38,30 @@ const RankedList = () => {
       modal.scrollTop = 0;
     }
   }, [children]);
+
+  //open the edit modal
+  const OpenEditModal = () => {
+    const modal = document.getElementById(
+      "rank_edit"
+    ) as HTMLDialogElement | null;
+    if (modal) {
+      modal.showModal();
+      modal.scrollTop = 0;
+    }
+  };
+  //get the clicked data
+  const GetRank = (rank: Rank) => {
+    setRank(rank);
+  };
+
+  //minitor the rank, if exist, open editmodal and empty it after
+  useEffect(() => {
+    if (rank) {
+      OpenEditModal();
+
+      // setRank(undefined);
+    }
+  }, [rank]);
 
   // re-load the data on this page
   async function ListLoadling() {
@@ -66,18 +94,18 @@ const RankedList = () => {
                   <div className="flex flex-row">
                     <button
                       className="btn btn-ghost btn-xs text-blue-500 "
-                      onClick={() => OpenModal(item.children)}
+                      onClick={() => OpenViewModal(item.children)}
                     >
                       View
                     </button>
                     <ModalViewRanked name={item.name} games={children} />
                     <button
                       className="btn btn-ghost btn-xs text-blue-500 "
-                      // onClick={() => OpenModal(item.id)}
+                      onClick={() => GetRank(item)}
                     >
                       Modify
                     </button>
-                    {/* {game && <ModalEditGame game={game} />} */}
+                    {rank && <ModalEditRanked rank={rank} />}
                   </div>
                 </td>
               </tr>

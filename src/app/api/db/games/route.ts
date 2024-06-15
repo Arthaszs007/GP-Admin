@@ -67,7 +67,7 @@ export async function POST(req:Request){
  export async function DELETE(req:Request){
     const {searchParams} = new URL(req.url)
     const gameID = searchParams.get('id')
-    console.log(gameID)
+
 
     const client = await clientPromise
     const db = client.db("GP")

@@ -40,9 +40,29 @@ export async function POST(req:Request) {
 }
 
 export async function PUT(req:Request){
-    return NextResponse.json("",{status:200})
+    const rank = await req.json();
+
+    const client = await clientPromise;
+    const db = client.db("GP");
+
+    db.collection("rank")
+    .updateOne({id:rank.id},{$set:{name:rank.name,children:rank.children}})
+
+    return NextResponse.json(rank,{status:200})
 }
 
 export async function DELETE(req:Request){
-    return NextResponse.json("",{status:200})
+    const {searchParams} = new URL(req.url);
+    const rankID = searchParams.get("rankid")
+
+    const client = await clientPromise;
+    const db = client.db("GP");
+
+    await db
+    .collection("rank")
+    .deleteOne({id:rankID})
+
+    
+
+    return NextResponse.json("successfully done",{status:200})
 }

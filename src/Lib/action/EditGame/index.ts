@@ -43,7 +43,7 @@ export async function action_EditGame  (
         
 
     }catch(e){
-        if(e instanceof z.ZodError) return {error:"can't be empty",code:"VALIDATION_ERROR"}
+        if(e instanceof z.ZodError) return {error:"can't be empty",code:EErrorType.UNVALID_INPUT}
         else if (e instanceof customError && e.code === EErrorType.ID_USED) {
             return {error:e.message,code:e.code}
         }

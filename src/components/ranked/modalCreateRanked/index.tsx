@@ -57,6 +57,7 @@ const ModalCreateRanked = () => {
         | undefined;
       if (form) form.reset();
       setMessageError("");
+      setWaitList([]);
       modal.close();
     } else {
       console.error("Modal element not found");
