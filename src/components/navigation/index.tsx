@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import { signOut } from "../../Lib/auth/auth";
 
 const Navigation = () => {
   return (

@@ -27,3 +27,12 @@ type Rankchild={
 }
 
 type Rankchildren =Rankchild[]
+
+type Config={
+    id:string,
+    pop:string,
+    editors:string,
+    upcome:string,
+    news:string,
+    release:string
+}

@@ -85,3 +85,7 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/api/db/rank?rankid=20018
+
+
+###
+GET http://localhost:3000/api/db/config
